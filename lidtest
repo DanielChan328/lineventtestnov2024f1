@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>查找名稱</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<h1>查找名稱</h1>
+<p>請輸入URL後綴以查找相應的名稱：</p>
+<input type="text" id="urlInput" placeholder="輸入URL後綴">
+<button onclick="findName()">查找</button>
+<p id="nameResult"></p>
+
+<script>
+    function findName() {
+        const csvData = `LID,Name
+http://go.danielchan.coms.hk/6nl6wa,A
+http://go.danielchan.coms.hk/6nl6wg,B
+http://go.danielchan.coms.hk/6nl6wk,C
+http://go.danielchan.coms.hk/6nl6wn,D
+http://go.danielchan.coms.hk/6nl6ws,E
+http://go.danielchan.coms.hk/6nl6wu,F
+http://go.danielchan.coms.hk/6nl6x4,G
+http://go.danielchan.coms.hk/6nl6xe,H
+http://go.danielchan.coms.hk/6nl6xh,I
+http://go.danielchan.coms.hk/6nl6xk,J
+http://go.danielchan.coms.hk/6nl6xp,K
+http://go.danielchan.coms.hk/6nl6xu,L
+http://go.danielchan.coms.hk/6nl6xz,M
+http://go.danielchan.coms.hk/6nl6y4,N
+http://go.danielchan.coms.hk/6nl6y8,O
+http://go.danielchan.coms.hk/6nl6ya,P
+http://go.danielchan.coms.hk/6nl6yf,Q
+http://go.danielchan.coms.hk/6nl6yk,R
+http://go.danielchan.coms.hk/6nl6ym,S
+http://go.danielchan.coms.hk/6nl6yp,T
+http://go.danielchan.coms.hk/6nl6yr,U
+http://go.danielchan.coms.hk/6nl6yu,V
+http://go.danielchan.coms.hk/6nl6yw,W
+http://go.danielchan.coms.hk/6nl6yz,X
+http://go.danielchan.coms.hk/6nl6z6,Y
+http://go.danielchan.coms.hk/6nl6z8,Z`;
+
+        const lines = csvData.split('\n').slice(1); // 忽略標題行
+        const dataMap = new Map(lines.map(line => line.split(',')));
+
+        const inputUrl = document.getElementById('urlInput').value.trim();
+        const name = dataMap.get(inputUrl);
+        const nameResult = document.getElementById('nameResult');
+
+        if (name) {
+            nameResult.textContent = `查找到的名稱：${name}`;
+        } else {
+            nameResult.textContent = '未找到相應的名稱';
+        }
+    }
+</script>
+</body>
+</html>
